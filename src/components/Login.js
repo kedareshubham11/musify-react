@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react';
 import { loginUrl } from '../apis/Spotify';
 import './../assets/styles/Login.css';
 

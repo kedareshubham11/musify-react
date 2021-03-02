@@ -5,7 +5,7 @@ import { Avatar } from '@material-ui/core';
 import { useDataLayerValue } from '../context/DataLayer';
 
 function Header({ spotify }) {
-    const [{ user }, dispatch] = useDataLayerValue();
+    const [{ user }] = useDataLayerValue();
     return (
         <div className="header">
             <div className="header__left">

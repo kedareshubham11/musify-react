@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { getTokenFromUrl } from './apis/Spotify';
 import './App.css';
 import Login from "./components/Login";
@@ -10,7 +10,7 @@ const _spotify = new SpotifyWebApi();
 
 function App() {
   // access data layer
-  const [{ token, user }, dispatch] = useDataLayerValue();
+  const [{ token}, dispatch] = useDataLayerValue();
 
   useEffect(() => {
 
@@ -73,7 +73,7 @@ function App() {
       }
      
       
-  }, []);
+  }, [dispatch]);
 
 
   return (

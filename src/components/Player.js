@@ -7,7 +7,7 @@ import Sidebar from './Sidebar';
 
 function Player({ spotify }) {
     const audioRef = useRef(null);
-    const [{ current_song }, dispatch] = useDataLayerValue();
+    const [{ current_song }] = useDataLayerValue();
 
     useEffect(() => {
         audioRef.current.pause();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDataLayerValue } from '../context/DataLayer';
 import './../assets/styles/Body.css';
 import Header from './Header';
@@ -9,13 +9,13 @@ import SongRow from './SongRow';
 
 function Body({ spotify, audioRef }) {
     const [{ album }, dispatch] = useDataLayerValue();
-    const [playlist, setPlaylist]= useState([]);
+    // const [playlist, setPlaylist]= useState([]);
 
-    const playPlaylist = (alb) => {
+    /*const playPlaylist = (alb) => {
             if(alb){
             setPlaylist(alb?.tracks.items);
             console.log('lisst', playlist);
-          }
+          }*/
             
               // dispatch({
               //   type: "SET_ITEM",
@@ -26,7 +26,7 @@ function Body({ spotify, audioRef }) {
               //   playing: true,
               // });
          
-      }
+      // }
     
       const playSong = (track) => {
 
