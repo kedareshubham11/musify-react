@@ -1,10 +1,10 @@
 
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 
-const redirectUri = "http://localhost:3000/";
+const redirectUri = "https://shubham-kedare-musify-react.netlify.app/";
 
-// const clientId = "1b79a67cb030485192a2497e1137c5c1";  //original
-const client_id = "1dffab23499740809dc996557ae5987a";
+const client_id = "1b79a67cb030485192a2497e1137c5c1"; //original
+// const client_id = "1dffab23499740809dc996557ae5987a";
 
 const scopes = [
     "user-read-currently-playing",
