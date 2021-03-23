@@ -1,6 +1,6 @@
 .body {
     padding: 30px;
-    flex: 0.8;
+    flex: 0.9;
     height: 100vh;
     color: white;
     overflow-y: overlay;
@@ -45,8 +45,11 @@
     margin-right: 20px;
 }
 
+.body__icons > span {
+    margin-right: 20px;
+}
 .body__shuffle {
-    font-size: 80px !important;
+    font-size: 50px !important;
     margin-left: 30px;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -55,7 +58,24 @@
 }
 
 .body__fav {
+    font-size: 30px !important;
+    color: white;
+    
+}
+
+.body__fav2 {
     color: hotpink;
+}
+
+.body__fav:hover {
+    transition: 100ms transform ease-in;
+    transform: scale(1.08);
+    cursor: pointer;
+}
+.body__fav2:hover {
+    transition: 100ms transform ease-in;
+    transform: scale(1.08);
+    cursor: pointer;
 }
 
 .body__shuffle:hover {

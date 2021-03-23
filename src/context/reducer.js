@@ -6,6 +6,7 @@ export const initialState = {
     top_artists: null,
     playing: false,
     item: null,
+    playlist_songs: [],
     current_song:'https://p.scdn.co/mp3-preview/5cd4cbec6d344b76efe855c5ad483456f507ca6a?cid=1b79a67cb030485192a2497e1137c5c1',
     current_index: 0,
     // remove after finish developing
@@ -55,9 +56,20 @@ switch(action.type) {
     case "SET_PLAYLISTS":
         return {
             ...state,
-            playlists: action.playlists
+            playlists: [...state.playlists, action.playlists]
         }
     
+    case "SET_PLAYLIST_SONGS":
+        return {
+            ...state,
+            playlist_songs: action.playlist_song,
+        }
+    case "SET_PLAYLIST_SONGS_SIZE":
+        return {
+            ...state,
+            playlist_songs_size: action.playlist_songs_size,
+        }
+
     case "SET_ALBUM":
         return {
             ...state,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDataLayerValue } from '../context/DataLayer';
 import './../assets/styles/Body.css';
 import Header from './Header';
@@ -9,6 +9,7 @@ import SongRow from './SongRow';
 
 function Body({ spotify, audioRef }) {
     const [{ album }, dispatch] = useDataLayerValue();
+    const [fav, setFav] = useState(null);
     // const [playlist, setPlaylist]= useState([]);
 
     /*const playPlaylist = (alb) => {
@@ -27,8 +28,25 @@ function Body({ spotify, audioRef }) {
               // });
          
       // }
-    
-      const playSong = (track) => {
+    // useEffect(() => {
+    //   let songs = [];
+    //   album?.tracks.items.map(item => {
+    //     songs.push(item);
+    //     return null;
+    //   });
+
+    //   dispatch({
+    //     type: "SET_PLAYLIST_SONGS",
+    //     playlist_songs: songs,
+    //   })
+    //   dispatch({
+    //     type: "SET_PLAYLIST_SONG_SIZE",
+    //     playlist_song: songs.length
+    //   })
+    //   console.log('SONGS ARRAY', playlist_songs);
+    // }, [album, playlist_songs, dispatch]);
+
+      const playSong = (track, index) => {
 
         dispatch({
           type: "SET_ITEM",
@@ -40,13 +58,19 @@ function Body({ spotify, audioRef }) {
           current_song:track.preview_url
         });
 
-        audioRef.current.play();
-        audioRef.current.play();
+        dispatch({
+          type: "SET_CURRENT_INDEX",
+          current_index:index
+        });
 
         dispatch({
           type: "SET_PLAYING",
           playing: true
         });
+        audioRef.current.src = track.preview_url;
+        audioRef.current.play();
+
+        
             
       }
     
@@ -66,19 +90,20 @@ function Body({ spotify, audioRef }) {
             </div>
 
             <div className="body__songs">
-                <div className="body__icons">
+              <div className="body__icons">
                 <PlayCircleFilledWhiteIcon 
                 className="body__shuffle" 
                 // onClick={playPlaylist(album)}
                 />
-
-                <FavoriteIcon fontSize="large" className="body__fav"/>
+                <span onClick={()=> fav? setFav(null) : setFav('Fav')}>
+                <FavoriteIcon className={`body__fav ${fav? "body__fav2" :'' } `}/>
+                </span>
                 <MoreHorizIcon />
                 </div>
 
                 {/* list of songs */}
-                {album?.tracks.items.map(item => (
-                    <SongRow playSong={playSong} track={item.track} />
+                {album?.tracks.items.map((item, index) => (
+                    <SongRow playSong={playSong} track={item.track} index={index}/>
                 ))}
             </div>
         </div>

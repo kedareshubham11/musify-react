@@ -31,6 +31,11 @@
     justify-content: space-between;
     max-width: 300px;
 }
+.footer__center > span{
+    margin: 0;
+    padding: 0;
+    display: inherit;
+}
 .footer__green {
     color: green;
 }

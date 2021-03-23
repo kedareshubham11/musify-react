@@ -40,27 +40,70 @@ function App() {
 
           // _spotify.getUserPlaylists(user?.id)
           
-          _spotify.getMySavedAlbums().then((list) => {
-            dispatch({
-              type: "SET_PLAYLISTS",
-              playlists: list,
-            });
+          // _spotify.getMySavedAlbums().then((list) => {
+          //   dispatch({
+          //     type: "SET_PLAYLISTS",
+          //     playlists: list,
+          //   });
             // dispatch({
             //   type: "SET_ALBUM",
             //   album: playlists
 
             // });
-            console.log('playlist 🔥🔥',list);
-          });
+            
+          // });
 
           _spotify.getPlaylist('37i9dQZEVXcG0q8UIxmMTv').then(response => {
-            dispatch({
+            dispatch({ 
               type: "SET_ALBUM",
               album: response 
 
             });
             console.log('album',response);
+            dispatch({ 
+              type: "SET_PLAYLISTS",
+              playlists: response 
+
+            });
           });
+          
+          _spotify.getPlaylist('3rPT5ZJH9Nxa0qwF8V2csz').then(response => {
+        
+            dispatch({ 
+              type: "SET_PLAYLISTS",
+              playlists: response 
+
+            });
+          });
+
+          _spotify.getPlaylist('37i9dQZF1DWSiZVO2J6WeI').then(response => {
+    
+            dispatch({ 
+              type: "SET_PLAYLISTS",
+              playlists: response 
+
+            });
+          });
+
+          _spotify.getPlaylist('37i9dQZF1DX6mkzLlsPKo5').then(response => {
+    
+            dispatch({ 
+              type: "SET_PLAYLISTS",
+              playlists: response 
+
+            });
+          });          
+
+          _spotify.getPlaylist('37i9dQZEVXbMDoHDwVN2tF').then(response => {
+    
+            dispatch({ 
+              type: "SET_PLAYLISTS",
+              playlists: response 
+
+            });
+          });          
+          
+          
           
 
           _spotify.getMyTopArtists().then((response) =>
@@ -74,7 +117,7 @@ function App() {
      
       
   }, [dispatch]);
-
+  
 
   return (
     <div className="App">

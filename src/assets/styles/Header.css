@@ -26,8 +26,13 @@
 .header__right {
     display: flex;
     align-items: center;
+    background-color: darkslategray;
+    border-radius: 25px;
+    padding-left: 5px;
+    padding-right: 10px;
 }
 
 .display_name {
     margin-left: 10px;
 }
+

@@ -18,7 +18,7 @@ function Header({ spotify }) {
 
             <div className="header__right">
                 <Avatar src={user?.images[0]?.url} alt={user?.display_name} />
-                <h4 className="display_name">{user?.display_name}</h4>
+                <h5 className="display_name">{user?.display_name}</h5>
             </div>
         </div>
     )

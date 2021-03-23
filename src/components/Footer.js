@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './../assets/styles/Footer.css';
 import PlayCircleOutlineIcon from '@material-ui/icons/PlayCircleOutline';
 import PauseCircleOutlineIcon from '@material-ui/icons/PauseCircleOutline';
@@ -12,7 +12,11 @@ import VolumeDownIcon from '@material-ui/icons/VolumeDown';
 import { useDataLayerValue } from '../context/DataLayer';
 
 function Footer({ spotify, audioRef }) {
-    const [{ item, playing }, dispatch] = useDataLayerValue();
+    const [{ item, playing, album, current_index }, dispatch] = useDataLayerValue();
+    const [sliderValue, setSliderValue] = useState(50);
+
+    const [shuffle, setShuffle] = useState(false);
+    const [repeat, setRepeat] = useState(false);
 
     useEffect(() => {
         spotify.getMyCurrentPlaybackState().then((r) => {
@@ -52,34 +56,80 @@ function Footer({ spotify, audioRef }) {
       };
     
     const skipNext = () => {
-        spotify.skipToNext();
-        spotify.getMyCurrentPlayingTrack().then((r) => {
+
+        if(current_index === album.tracks.items.length -1){
+
+          dispatch({
+            type: "SET_CURRENT_INDEX",
+            current_index: 0
+          });
+        }
+        else
+        {
+          dispatch({
+            type: "SET_CURRENT_INDEX",
+            current_index: current_index + 1
+          });
+
+        }
+
           dispatch({
             type: "SET_ITEM",
-            item: r.item,
+            item: album.tracks.items[current_index].track,
           });
+  
+          dispatch({
+            type: "SET_CURRENT_SONG",
+            current_song: album.tracks.items[current_index].track.preview_url
+          });
+  
+  
           dispatch({
             type: "SET_PLAYING",
-            playing: true,
+            playing: true
           });
-        });
-        console.log('Next',item);
-      };
+          audioRef.current.src = album.tracks.items[current_index].track.preview_url;
+          audioRef.current.play();
+  
+        }
+      
+       
+      
     
     const skipPrevious = () => {
-        spotify.skipToPrevious();
-        spotify.getMyCurrentPlayingTrack().then((r) => {
-          dispatch({
-            type: "SET_ITEM",
-            item: r.item,
-          });
-          dispatch({
-            type: "SET_PLAYING",
-            playing: true,
-          });
+      if(current_index > 0)
+      {
+        dispatch({
+          type: "SET_CURRENT_INDEX",
+          current_index: current_index -1
         });
-        console.log('Previous',item);
+
+      
+
+        dispatch({
+          type: "SET_ITEM",
+          item: album.tracks.items[current_index].track,
+        });
+
+        dispatch({
+          type: "SET_CURRENT_SONG",
+          current_song: album.tracks.items[current_index].track.preview_url
+        });
+
+
+        dispatch({
+          type: "SET_PLAYING",
+          playing: true
+        });
+        audioRef.current.src = album.tracks.items[current_index].track.preview_url;
+        audioRef.current.play();
+      }
       };
+
+    const handleVolume = (event, newValue) => {
+      audioRef.current.volume = newValue/100;
+      setSliderValue(newValue);
+    }
 
     return (
         <div className="footer">
@@ -102,7 +152,10 @@ function Footer({ spotify, audioRef }) {
             </div>
 
             <div className="footer__center">
-                <ShuffleIcon className="footer__green"/>
+                <span onClick={()=> shuffle? setShuffle(false) : setShuffle(true)}>
+                <ShuffleIcon className={`footer__icon ${shuffle? 'footer__green' : ''}`}/>
+                </span>
+                
                 <SkipPreviousIcon onClick={skipPrevious} className="footer__icon" />
                 {playing ? (
                     <PauseCircleOutlineIcon
@@ -119,7 +172,10 @@ function Footer({ spotify, audioRef }) {
                 )}
                 
                 <SkipNextIcon onClick={skipNext} className="footer__icon" />
-                <RepeatIcon className="footer__green" />
+                <span onClick={() => repeat? setRepeat(false) : setRepeat(true)}>
+                <RepeatIcon className={`footer__icon ${repeat? 'footer__green' : ''}`} />
+                </span>
+                
             </div>
 
             <div className="footer__right">
@@ -131,7 +187,7 @@ function Footer({ spotify, audioRef }) {
                         <VolumeDownIcon />
                     </Grid>
                     <Grid item xs>
-                        <Slider aria-labelledby="continuous-slider"/>
+                        <Slider value={sliderValue} onChange={handleVolume} aria-labelledby="continuous-slider"/>
                     </Grid>
                 </Grid>
             </div>

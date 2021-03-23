@@ -10,7 +10,7 @@ function Player({ spotify }) {
     const [{ current_song }] = useDataLayerValue();
 
     useEffect(() => {
-        audioRef.current.pause();
+        // audioRef.current.pause();
     }, [current_song]);
 
     
@@ -24,7 +24,7 @@ function Player({ spotify }) {
             </div>
             
             {/* footer */}
-            <audio ref={audioRef} src={current_song} ></audio>
+            <audio ref={audioRef}  preload="true"></audio>
             {/* onTimeUpdate={handleTimeUpdate} onLoadedMetadata={handleTimeUpdate} onEnded={skipSong} */}
             <Footer spotify={spotify} audioRef={audioRef}/>
         </div>
