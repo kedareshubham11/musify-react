@@ -8,7 +8,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import SongRow from './SongRow';
 
 function Body({ spotify, audioRef }) {
-    const [{ album }, dispatch] = useDataLayerValue();
+    const [{ album, current_index }, dispatch] = useDataLayerValue();
     const [fav, setFav] = useState(null);
     // const [playlist, setPlaylist]= useState([]);
 
@@ -73,6 +73,31 @@ function Body({ spotify, audioRef }) {
         
             
       }
+
+    const playShuffle = ()=> {
+      dispatch({
+        type: "SET_CURRENT_INDEX",
+        current_index: 0
+      });
+
+      dispatch({
+        type: "SET_ITEM",
+        item: album.tracks.items[current_index].track,
+      });
+
+      dispatch({
+        type: "SET_CURRENT_SONG",
+        current_song: album.tracks.items[current_index].track.preview_url
+      });
+
+
+      dispatch({
+        type: "SET_PLAYING",
+        playing: true
+      });
+      audioRef.current.src = album.tracks.items[current_index].track.preview_url;
+      audioRef.current.play();
+    }
     
 
     return (
@@ -91,10 +116,12 @@ function Body({ spotify, audioRef }) {
 
             <div className="body__songs">
               <div className="body__icons">
+                <span onClick={playShuffle}>
                 <PlayCircleFilledWhiteIcon 
                 className="body__shuffle" 
                 // onClick={playPlaylist(album)}
                 />
+                </span>
                 <span onClick={()=> fav? setFav(null) : setFav('Fav')}>
                 <FavoriteIcon className={`body__fav ${fav? "body__fav2" :'' } `}/>
                 </span>

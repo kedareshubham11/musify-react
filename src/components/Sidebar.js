@@ -20,12 +20,16 @@ function Sidebar() {
             <SidebarOption title="Your Library" Icon={LibraryMusicIcon}/>
 
             <br />
-            <strong className="sidebar__title">PLAYLIST</strong>
-            <hr />
+            
+                <strong className="sidebar__title">PLAYLIST</strong>
+                <hr />
+                <div className="sidebar__playlist">
+                    {playlists?.map(playlist => (
+                    <SidebarOption  title={playlist.name} onClick={playlist} />  
+                    ))}
 
-            {playlists?.map(playlist => (
-              <SidebarOption  title={playlist.name} onClick={playlist} />  
-            ))}
+            <SidebarOption  title="newone"  />  
+                </div>
         </div>
     )
 }

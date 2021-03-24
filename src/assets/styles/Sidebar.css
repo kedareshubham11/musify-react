@@ -5,8 +5,10 @@
     padding-left: 10px;
     padding-right: 10px;
     min-width: 230px ;
-    height: 100vhs;
     background-color: #040404;
+    
+
+    
 }
 
 .sidebar__logo {
@@ -26,5 +28,10 @@
     border: 1px solid #282828;
     width: 90%;
     margin: 10px auto;
+}
+
+.sidebar__playlist {
+    height: 100vh;
+    overflow-y: overlay;
 }
 

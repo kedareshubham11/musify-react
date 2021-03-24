@@ -1,3 +1,8 @@
+.player {
+    position: fixed;
+}
+
 .player__body {
     display: flex;
+    
 }

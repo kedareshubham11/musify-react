@@ -11,7 +11,7 @@ export default function Login() {
             <div className="login__container">
 
                 <img 
-                src="https://cdn.telanganatoday.com/wp-content/uploads/2020/06/Spotify-now-works-with-Amaz.jpg"
+                src="images/Musify.png"
                 alt="logo"/>
 
                 <a href={loginUrl}>LOGIN WITH SPOTIFY</a>
